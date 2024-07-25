@@ -22,17 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const word = data[0].word;
             const meaning = data[0].meanings[0].definitions[0].definition;
             const sound = data[0].phonetics[0].audio;
+            const synonyms = data[0].meanings[0].synonyms.join(', ') || 'None';
+            const antonyms = data[0].meanings[0].antonyms.join(', ') || 'None';
 
             res.innerHTML = `
             
                 <h2><strong>Word:</strong> ${word}</h2>
                 <p>${data[0].meanings[0].partOfSpeech}
-                <p><strong>Meaning:</strong> ${meaning}</p>
+
+                <p><strong>Meaning:</strong> ${meaning}</p><br>
+
+                
 
 
                
                 ${sound ? `<audio controls><source src="${sound}" type="audio/mpeg">Your browser does not support the audio element.</audio>` : ''}
-            `;
+
+               <p><strong>synonyms:</strong>${synonyms}</p><br>
+               <p><strong>antoyms:</strong>${antonyms}</p>
+           
+           
+           
+                `;
         } catch (error) {
             res.innerHTML = `<p>Error: ${error.message}</p>`;
         }
